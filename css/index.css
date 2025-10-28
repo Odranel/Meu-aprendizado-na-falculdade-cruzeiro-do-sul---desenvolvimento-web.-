@@ -1,0 +1,251 @@
+/* ===================================================
+   1. DESIGN SYSTEM (Variáveis CSS Customizadas)
+   =================================================== */
+:root {
+    /* 1.1 Paleta de Cores (Mínimo 8 cores) */
+    --color-primary: #FF7F50; /* Coral - Gatos */
+    --color-secondary: #4682B4; /* Azul Aço */
+    --color-accent: #3CB371; /* Verde Média */
+    --color-neutral-dark: #333333; /* Texto Principal */
+    --color-neutral-light: #f4f4f4; /* Fundo Leve */
+    --color-white: #ffffff;
+    --color-success: #28a745;
+    --color-error: #dc3545;
+
+    /* 1.2 Tipografia Hierárquica (Mínimo 5 tamanhos) */
+    --font-size-xl: 3.0rem; /* Título principal */
+    --font-size-lg: 2.0rem; /* Títulos de seção */
+    --font-size-md: 1.25rem; /* Subtítulos */
+    --font-size-base: 1.0rem; /* Corpo de texto */
+    --font-size-sm: 0.875rem; /* Rodapé/Notas */
+
+    /* 1.3 Sistema de Espaçamento Modular (Múltiplos de 8px) */
+    --spacing-xxs: 4px;   /* 0.25rem (opcional, mas útil) */
+    --spacing-xs: 8px;    /* 0.5rem */
+    --spacing-sm: 16px;   /* 1.0rem */
+    --spacing-md: 24px;   /* 1.5rem */
+    --spacing-lg: 32px;   /* 2.0rem */
+    --spacing-xl: 48px;   /* 3.0rem */
+    --spacing-xxl: 64px;  /* 4.0rem */
+
+    /* 1.4 Outras Variáveis */
+    --border-radius: 6px;
+    --transition-time: 0.3s;
+}
+
+/* ---------------------------------------------------
+   2. ESTILOS BASE E RESET SIMPLES
+   --------------------------------------------------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    font-size: 16px; /* Base rem */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--color-neutral-dark);
+    background-color: var(--color-white);
+}
+
+h1 { font-size: var(--font-size-xl); margin-bottom: var(--spacing-sm); }
+h2 { font-size: var(--font-size-lg); margin-bottom: var(--spacing-sm); }
+p { margin-bottom: var(--spacing-sm); }
+a { color: var(--color-primary); text-decoration: none; transition: color var(--transition-time); }
+a:hover { color: var(--color-secondary); }
+
+/* Remove CSS inline do H2 (se a prioridade é o CSS externo) */
+section h2 { 
+    color: var(--color-neutral-dark) !important; 
+    font-style: normal !important;
+}
+/* No seu HTML o primeiro H2 tem CSS inline, para o CSS externo sobrescrever, use !important ou remova o style inline no HTML */
+
+
+/* ===================================================
+   3. LEIAUTE PRINCIPAL COM GRID
+   =================================================== */
+body {
+    /* Define o grid principal para o BODY ou um Container externo */
+    display: grid;
+    /* Cabeçalho, Main e Rodapé */
+    grid-template-rows: auto 1fr auto; 
+    grid-template-columns: 100%;
+    min-height: 100vh;
+}
+
+main {
+    /* Centraliza o conteúdo e aplica padding lateral */
+    width: 100%;
+    max-width: 1200px; /* Largura máxima para desktop */
+    margin: 0 auto;
+    padding: var(--spacing-md);
+    display: grid;
+    /* Grid customizado de 12 colunas para as seções */
+    grid-template-columns: repeat(12, 1fr); 
+    gap: var(--spacing-lg);
+}
+
+/* As seções vão ocupar todas as 12 colunas por padrão */
+main section {
+    grid-column: 1 / -1; 
+    padding: var(--spacing-lg);
+    background-color: var(--color-neutral-light);
+    border-radius: var(--border-radius);
+}
+
+
+/* ===================================================
+   4. NAVEGAÇÃO SOFISTICADA E FLEXBOX
+   =================================================== */
+header {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: var(--spacing-md) var(--spacing-lg);
+    display: flex; /* Utilizando Flexbox para alinhar elementos internos */
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: var(--font-size-lg);
+    margin-bottom: 0;
+}
+
+nav ul {
+    list-style: none;
+    display: flex; /* Flexbox para o menu de desktop */
+}
+
+nav ul li a {
+    color: var(--color-white);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    display: block;
+}
+
+nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius);
+}
+
+/* Implementação Mínima Menu Hambúrguer (Escondido por enquanto) */
+.menu-hamburguer {
+    display: none; 
+    cursor: pointer;
+    font-size: var(--font-size-lg);
+    color: var(--color-white);
+}
+
+/* ===================================================
+   5. RODAPÉ
+   =================================================== */
+footer {
+    grid-row: 3;
+    background-color: var(--color-neutral-dark);
+    color: var(--color-neutral-light);
+    text-align: center;
+    padding: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+}
+
+/* ===================================================
+   6. RESPONSIVIDADE (5 BREAKPOINTS OBRIGATÓRIOS)
+   =================================================== */
+
+/*
+  Breakpoints Sugeridos:
+  1. Mobile Pequeno (Até 480px)
+  2. Mobile Grande (481px a 767px) - Padrão de 12 colunas em uma linha.
+  3. Tablet (768px a 1023px) - Layout de 2 colunas.
+  4. Desktop Pequeno (1024px a 1439px) - Layout de 3 colunas.
+  5. Desktop Grande (Acima de 1440px) - Layout de 4 colunas.
+*/
+
+/* --------------------------------------------------- */
+/* Breakpoint 1: Mobile Pequeno (Max-width 480px) */
+@media screen and (max-width: 480px) {
+    /* Ajustes finos de tipografia */
+    :root {
+        --font-size-xl: 2.5rem;
+        --font-size-lg: 1.5rem;
+    }
+    
+    /* Configuração para Menu Mobile (Hambúrguer Visível) */
+    nav ul {
+        display: none; /* Esconde o menu de desktop */
+        /* Para mostrar o menu, você precisaria de JS ou de um truque CSS/checkbox */
+    }
+    .menu-hamburguer {
+        display: block; 
+    }
+}
+
+/* --------------------------------------------------- */
+/* Breakpoint 2: Mobile Grande e Padrão (Max-width 767px) */
+@media screen and (max-width: 767px) {
+    header {
+        flex-direction: column; /* Cabeçalho empilha no mobile */
+        text-align: center;
+    }
+
+    nav ul {
+        flex-direction: column; /* Menu em lista vertical */
+        width: 100%;
+        margin-top: var(--spacing-sm);
+    }
+    
+    nav ul li {
+        margin-bottom: var(--spacing-xs);
+    }
+
+    main {
+        gap: var(--spacing-sm); /* Diminui o gap */
+    }
+}
+
+/* --------------------------------------------------- */
+/* Breakpoint 3: Tablet (Min-width 768px) */
+@media screen and (min-width: 768px) {
+    /* Layout de 2 colunas: Duas seções lado a lado */
+    /* Cada seção ocupa 6 das 12 colunas */
+    main section:nth-child(odd) {
+        grid-column: span 6;
+    }
+    main section:nth-child(even) {
+        grid-column: span 6;
+    }
+
+    /* A última seção (Contato) pode ocupar todas as 12 colunas */
+    main section:last-child {
+        grid-column: 1 / -1; 
+    }
+}
+
+/* --------------------------------------------------- */
+/* Breakpoint 4: Desktop Pequeno (Min-width 1024px) */
+@media screen and (min-width: 1024px) {
+    /* Layout de 3 colunas para as primeiras seções */
+    /* 12 colunas / 3 = 4 colunas para cada seção */
+    main section:not(:last-child) {
+        grid-column: span 4; 
+    }
+    /* Missão, Visão e Quem Somos lado a lado. Contato abaixo. */
+}
+
+/* --------------------------------------------------- */
+/* Breakpoint 5: Desktop Grande (Min-width 1440px) */
+@media screen and (min-width: 1440px) {
+    /* Aumenta a largura máxima para telas maiores */
+    main {
+        max-width: 1400px;
+    }
+    /* E espaçamentos */
+    :root {
+        --spacing-xxl: 80px;
+    }
+}
