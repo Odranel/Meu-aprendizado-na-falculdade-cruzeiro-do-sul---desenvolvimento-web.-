@@ -1,0 +1,292 @@
+/* ===================================================
+   DESIGN SYSTEM (Variáveis CSS Customizadas)
+   =================================================== */
+:root {
+    /* 1.1 Paleta de Cores (Mínimo 8 cores) */
+    --color-primary: #FF7F50; /* Coral - Gatos */
+    --color-secondary: #4682B4; /* Azul Aço */
+    --color-accent: #3CB371; /* Verde Média */
+    --color-neutral-dark: #333333; /* Texto Principal */
+    --color-neutral-light: #f4f4f4; /* Fundo Leve */
+    --color-white: #ffffff;
+    --color-success: #28a745;
+    --color-error: #dc3545;
+
+    /*  Tipografia Hierárquica (Mínimo 5 tamanhos) */
+    --font-size-xl: 3.0rem; /* Título principal */
+    --font-size-lg: 2.0rem; /* Títulos de seção */
+    --font-size-md: 1.25rem; /* Subtítulos */
+    --font-size-base: 1.0rem; /* Corpo de texto */
+    --font-size-sm: 0.875rem; /* Rodapé/Notas */
+
+    /* Sistema de Espaçamento Modular (Múltiplos de 8px) */
+    --spacing-xxs: 4px;   
+    --spacing-xs: 8px;    
+    --spacing-sm: 16px;   
+    --spacing-md: 24px;   
+    --spacing-lg: 32px;   
+    --spacing-xl: 48px;   
+    --spacing-xxl: 64px;  
+
+    /*  Outras Variáveis */
+    --border-radius: 6px;
+    --transition-time: 0.3s;
+}
+
+/* ---------------------------------------------------
+   ESTILOS BASE E RESET SIMPLES
+   --------------------------------------------------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html { font-size: 16px; }
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--color-neutral-dark);
+    background-color: var(--color-white);
+    
+    /* Layout Grid Principal (Geral para todas as páginas) */
+    display: grid;
+    grid-template-rows: auto 1fr auto; 
+    grid-template-columns: 100%;
+    min-height: 100vh;
+}
+
+h1 { font-size: var(--font-size-xl); margin-bottom: var(--spacing-sm); }
+h2 { font-size: var(--font-size-lg); margin-bottom: var(--spacing-md); }
+p { margin-bottom: var(--spacing-sm); }
+a { color: var(--color-primary); text-decoration: none; transition: color var(--transition-time); }
+a:hover { color: var(--color-secondary); }
+
+/* ---------------------------------------------------
+   HEADER E NAVEGAÇÃO (FLEXBOX)
+   --------------------------------------------------- */
+header {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: var(--spacing-md) var(--spacing-lg);
+    display: flex; /* Flexbox */
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: var(--font-size-lg);
+    margin-bottom: 0;
+}
+
+nav ul {
+    list-style: none;
+    display: flex; /* Flexbox */
+}
+
+nav ul li a {
+    color: var(--color-white);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    display: block;
+}
+
+nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius);
+}
+
+/* ---------------------------------------------------
+   LAYOUT MAIN E SEÇÕES (GRID - HOME PAGE)
+   --------------------------------------------------- */
+main {
+    width: 100%;
+    max-width: 1200px; 
+    margin: 0 auto;
+    padding: var(--spacing-md);
+    
+    /* Grid de 12 colunas para o conteúdo principal */
+    display: grid;
+    grid-template-columns: repeat(12, 1fr); 
+    gap: var(--spacing-lg);
+}
+
+/* Estilo para as seções da HOME PAGE */
+/* Na Home, as seções têm fundo claro e se comportam como blocos de conteúdo */
+main section {
+    grid-column: 1 / -1; /* Ocupa todas as 12 colunas por padrão */
+    padding: var(--spacing-lg);
+    background-color: var(--color-neutral-light);
+    border-radius: var(--border-radius);
+    margin-bottom: var(--spacing-md); /* Espaçamento entre seções */
+}
+
+/* ---------------------------------------------------
+   RODAPÉ
+   --------------------------------------------------- */
+footer {
+    grid-row: 3;
+    background-color: var(--color-neutral-dark);
+    color: var(--color-neutral-light);
+    text-align: center;
+    padding: var(--spacing-sm);
+    font-size: var(--font-size-sm);
+}
+
+/* ===================================================
+   ESTILOS ESPECÍFICOS DE FORMULÁRIO (CADASTRO)
+   =================================================== */
+/* Garante que a seção de cadastro também tenha um estilo */
+main section:has(form) {
+    max-width: 900px;
+    margin: var(--spacing-md) auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    display: block; 
+    font-weight: bold;
+    margin-bottom: var(--spacing-xxs);
+    font-size: var(--font-size-sm);
+    color: var(--color-neutral-dark);
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="date"],
+textarea {
+    width: 100%;
+    padding: var(--spacing-xs);
+    border: 1px solid #cccccc;
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-base);
+    transition: border-color var(--transition-time), box-shadow var(--transition-time);
+    margin-bottom: var(--spacing-xs); 
+}
+
+/* Foco e Validação Visual */
+input:focus, textarea:focus {
+    outline: none; 
+    border-color: var(--color-secondary); 
+    box-shadow: 0 0 0 3px rgba(70, 130, 180, 0.2); 
+}
+input:valid { border-color: var(--color-success); }
+input:invalid:not(:focus):required { border-color: var(--color-error); }
+
+
+/* ---------------------------------------------------
+   ORGANIZAÇÃO RESPONSIVA DO FORMULÁRIO (Usando Grid)
+   --------------------------------------------------- */
+form {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--spacing-md); 
+}
+
+form p {
+    grid-column: span 12; 
+    margin-bottom: 0;
+}
+
+form h2 {
+    grid-column: span 12; 
+    margin-top: var(--spacing-lg);
+    text-align: center;
+}
+
+/* ---------------------------------------------------
+   ESTILOS DE BOTÕES E ESTADOS VISUAIS
+   --------------------------------------------------- */
+button[type="submit"] {
+    display: inline-block;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: var(--font-size-base);
+    font-weight: bold;
+    text-align: center;
+    transition: background-color var(--transition-time), transform var(--transition-time);
+    
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+button[type="submit"]:hover {
+    background-color: #ff6347; 
+    transform: translateY(-1px); 
+}
+
+button[type="submit"]:focus {
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 2px;
+}
+
+/* ===================================================
+   RESPONSIVIDADE (5 BREAKPOINTS OBRIGATÓRIOS)
+   =================================================== */
+
+/* --------------------------------------------------- */
+/* Breakpoint 2: Mobile Grande e Padrão (Max-width 767px) */
+@media screen and (max-width: 767px) {
+    header {
+        flex-direction: column; 
+        text-align: center;
+    }
+
+    nav ul {
+        flex-direction: column; 
+        width: 100%;
+        margin-top: var(--spacing-sm);
+    }
+}
+
+/* --------------------------------------------------- */
+/* Breakpoint 3: Tablet (Min-width 768px) */
+@media screen and (min-width: 768px) {
+    
+    /* HOME PAGE: Layout de 2 colunas para Seções */
+    main section:nth-child(odd) { grid-column: span 6; }
+    main section:nth-child(even) { grid-column: span 6; }
+    main section:last-child { grid-column: 1 / -1; }
+
+    /* CADASTRO PAGE: 2 Colunas para Formulário */
+    form p:nth-of-type(-n+6) { grid-column: span 6; }
+    form p:nth-of-type(7), form p:nth-of-type(10), form p:nth-of-type(11), form p:nth-of-type(12) { grid-column: span 6; }
+    form p:has(input[type="text"][id="numero"]) { grid-column: span 4; }
+    form p:has(input[type="text"][id="complemento"]) { grid-column: span 8; }
+    form p:has(input[type="text"][id="cep"]) { grid-column: span 12; }
+    form p:last-child { grid-column: 1 / -1; text-align: center; }
+}
+
+/* --------------------------------------------------- */
+/* Breakpoint 4: Desktop Pequeno (Min-width 1024px) */
+@media screen and (min-width: 1024px) {
+    /* HOME PAGE: Layout de 3 colunas */
+    main section:not(:last-child) { grid-column: span 4; }
+
+    /* CADASTRO PAGE: 3 Colunas para Formulário */
+    form p:nth-of-type(-n+6) { grid-column: span 4; } /* 3 campos por linha */
+    form p:nth-of-type(7) { grid-column: span 12; } /* Rua inteira */
+    form p:has(input[type="text"][id="numero"]) { grid-column: span 3; }
+    form p:has(input[type="text"][id="complemento"]) { grid-column: span 9; }
+    form p:nth-of-type(10), form p:nth-of-type(11), form p:nth-of-type(12) { grid-column: span 4; }
+    form p:has(input[type="text"][id="cep"]) { grid-column: span 4; }
+}
+
+/* --------------------------------------------------- */
+/* Breakpoint 5: Desktop Grande (Min-width 1440px) */
+@media screen and (min-width: 1440px) {
+    main { max-width: 1400px; }
+}
+
+/* --------------------------------------------------- */
+/* Breakpoint 1: Mobile Pequeno (Max-width 480px) */
+@media screen and (max-width: 480px) {
+    :root {
+        --font-size-xl: 2.5rem;
+        --font-size-lg: 1.5rem;
+    }
+}

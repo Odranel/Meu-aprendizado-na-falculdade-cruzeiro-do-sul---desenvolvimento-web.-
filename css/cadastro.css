@@ -1,0 +1,285 @@
+/* ===================================================
+   1. DESIGN SYSTEM (Copie as variáveis do seu index.css AQUI!)
+      - Necessário para que esta página utilize as mesmas cores e espaçamentos.
+   =================================================== */
+:root {
+    /* 1.1 Paleta de Cores (Mínimo 8 cores) */
+    --color-primary: #FF7F50; 
+    --color-secondary: #4682B4; 
+    --color-accent: #3CB371; 
+    --color-neutral-dark: #333333; 
+    --color-neutral-light: #f4f4f4; 
+    --color-white: #ffffff;
+    --color-success: #28a745;
+    --color-error: #dc3545;
+
+    /* 1.2 Tipografia Hierárquica */
+    --font-size-xl: 3.0rem; 
+    --font-size-lg: 2.0rem; 
+    --font-size-md: 1.25rem; 
+    --font-size-base: 1.0rem; 
+    --font-size-sm: 0.875rem; 
+
+    /* 1.3 Sistema de Espaçamento Modular */
+    --spacing-xxs: 4px;   
+    --spacing-xs: 8px;    
+    --spacing-sm: 16px;   
+    --spacing-md: 24px;   
+    --spacing-lg: 32px;   
+    --spacing-xl: 48px;   
+    --spacing-xxl: 64px;  
+
+    /* 1.4 Outras Variáveis */
+    --border-radius: 6px;
+    --transition-time: 0.3s;
+}
+
+/* ---------------------------------------------------
+   2. ESTILOS BASE E ESTRUTURA GLOBAL
+   --------------------------------------------------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html { font-size: 16px; }
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    color: var(--color-neutral-dark);
+    background-color: var(--color-white);
+    
+    /* Layout Grid Principal */
+    display: grid;
+    grid-template-rows: auto 1fr auto; 
+    min-height: 100vh;
+}
+
+h1 { font-size: var(--font-size-xl); margin-bottom: var(--spacing-sm); }
+h2 { font-size: var(--font-size-lg); margin-bottom: var(--spacing-md); }
+a { color: var(--color-primary); text-decoration: none; transition: color var(--transition-time); }
+a:hover { color: var(--color-secondary); }
+
+
+/* ---------------------------------------------------
+   3. HEADER E NAVEGAÇÃO (Cópia fiel do index.css)
+   --------------------------------------------------- */
+header {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: var(--spacing-md) var(--spacing-lg);
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: var(--font-size-lg);
+    margin-bottom: 0;
+}
+
+nav ul {
+    list-style: none;
+    display: flex; 
+}
+
+nav ul li a {
+    color: var(--color-white);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    display: block;
+}
+
+nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: var(--border-radius);
+}
+
+/* ---------------------------------------------------
+   4. MAIN E ESTRUTURA DO FORMULÁRIO (GRID)
+   --------------------------------------------------- */
+main {
+    width: 100%;
+    max-width: 900px; /* Largura um pouco menor para formulário */
+    margin: 0 auto;
+    padding: var(--spacing-md);
+}
+
+main section {
+    padding: var(--spacing-lg);
+    background-color: var(--color-neutral-light); /* Destaque leve para a área do formulário */
+    border-radius: var(--border-radius);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------------------------------------------------
+   5. ESTILOS DE FORMULÁRIO E VALIDAÇÃO VISUAL
+   --------------------------------------------------- */
+
+label {
+    display: block; 
+    font-weight: bold;
+    margin-bottom: var(--spacing-xxs);
+    font-size: var(--font-size-sm);
+    color: var(--color-neutral-dark);
+}
+
+/* Estiliza todos os inputs */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="tel"],
+input[type="date"],
+textarea {
+    width: 100%;
+    padding: var(--spacing-xs);
+    border: 1px solid #cccccc;
+    border-radius: var(--border-radius);
+    font-size: var(--font-size-base);
+    transition: border-color var(--transition-time), box-shadow var(--transition-time);
+    margin-bottom: var(--spacing-xs); 
+}
+
+/* Foco e Estados Visuais */
+input:focus, textarea:focus {
+    outline: none; 
+    border-color: var(--color-secondary); 
+    box-shadow: 0 0 0 3px rgba(70, 130, 180, 0.2); 
+}
+
+/* Validação Visual: Válido */
+input:valid {
+    border-color: var(--color-success);
+}
+
+/* Validação Visual: Inválido (requerido, mas não focado) */
+input:invalid:not(:focus):required {
+    border-color: var(--color-error); 
+}
+
+/* ---------------------------------------------------
+   6. ORGANIZAÇÃO RESPONSIVA DO FORMULÁRIO (Usando Grid)
+   --------------------------------------------------- */
+form {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--spacing-md); 
+}
+
+form p {
+    grid-column: span 12; /* Por padrão, 1 coluna (Mobile) */
+    margin-bottom: 0;
+}
+
+form h2 {
+    grid-column: span 12; 
+    margin-top: var(--spacing-lg);
+    text-align: center;
+}
+
+/* ---------------------------------------------------
+   7. ESTILOS DE BOTÕES
+   --------------------------------------------------- */
+button[type="submit"] {
+    display: inline-block;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-size: var(--font-size-base);
+    font-weight: bold;
+    text-align: center;
+    transition: background-color var(--transition-time), transform var(--transition-time);
+    
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+button[type="submit"]:hover {
+    background-color: #ff6347; 
+    transform: translateY(-1px); 
+}
+
+button[type="submit"]:focus {
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 2px;
+}
+
+
+/* ---------------------------------------------------
+   8. RESPONSIVIDADE (Layout em Múltiplas Colunas)
+   --------------------------------------------------- */
+
+/* Breakpoint 3: Tablet (Min-width 768px) - Layout de 2 Colunas */
+@media screen and (min-width: 768px) {
+    
+    /* Campos de usuário em 2 colunas (50/50) */
+    form p:nth-of-type(-n+6) {
+        grid-column: span 6; 
+    }
+
+    /* Campos de endereço em 2 colunas */
+    form p:nth-of-type(7),  /* Rua */
+    form p:nth-of-type(10), /* Bairro */
+    form p:nth-of-type(11), /* Cidade */
+    form p:nth-of-type(12)  /* Estado */
+    {
+        grid-column: span 6; 
+    }
+
+    /* Número e Complemento */
+    form p:has(input[type="text"][id="numero"]) { 
+        grid-column: span 4; /* Número (Menor) */
+    }
+    form p:has(input[type="text"][id="complemento"]) { 
+        grid-column: span 8; /* Complemento (Maior) */
+    }
+    
+    /* CEP */
+    form p:has(input[type="text"][id="cep"]) {
+        grid-column: span 12; /* Centraliza o CEP */
+    }
+
+    /* Botão de Envio */
+    form p:last-child {
+        grid-column: 1 / -1; 
+        text-align: center; /* Centraliza o botão no final */
+    }
+}
+
+
+/* Breakpoint 4: Desktop Pequeno (Min-width 1024px) - Layout de 3 Colunas */
+@media screen and (min-width: 1024px) {
+    
+    /* Campos de usuário em 3 colunas (4/12) */
+    form p:nth-of-type(-n+6) {
+        grid-column: span 4; 
+    }
+    
+    /* Campo Rua (Largo) */
+    form p:nth-of-type(7) { 
+        grid-column: span 12; 
+    }
+
+    /* Número e Complemento - Ajustados para a nova linha do Grid */
+    form p:has(input[type="text"][id="numero"]) { 
+        grid-column: span 3; 
+    }
+    form p:has(input[type="text"][id="complemento"]) { 
+        grid-column: span 9; 
+    }
+
+    /* Bairro, Cidade, Estado em 3 colunas (4/12) */
+    form p:nth-of-type(10), /* Bairro */
+    form p:nth-of-type(11), /* Cidade */
+    form p:nth-of-type(12)  /* Estado */
+    {
+        grid-column: span 4; 
+    }
+    
+    /* CEP */
+    form p:has(input[type="text"][id="cep"]) {
+        grid-column: span 4;
+    }
+}
